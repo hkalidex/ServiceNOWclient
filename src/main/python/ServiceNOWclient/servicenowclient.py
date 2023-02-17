@@ -128,7 +128,7 @@ class ServiceNOWclient(RESTclient):
                 break
         logger.debug('retrieved all pages from endpoint {}'.format(endpoint))
 
-    def get_physical_hardware(self, page_size=10, hardware_status=['In Use']):
+    def get_physical_hardware(self, page_size=1000, hardware_status=['In Use']):
         """ get physical hardware records
         """
         logger.debug('retrieving physical hardware records using page size {} and hardware status {}'.format(page_size, hardware_status))
@@ -166,7 +166,7 @@ class ServiceNOWclient(RESTclient):
                 '&sysparm_display_value=true')
         return self.get_all_pages(query, page_size, apply_filter=filter_hardware_status, hardware_status=hardware_status)
 
-    def get_physical_servers(self, page_size=10):
+    def get_physical_servers(self, page_size=1000):
         """ get physical servers
         """
         logger.debug('retrieving physical server records using page size {}'.format(page_size))
