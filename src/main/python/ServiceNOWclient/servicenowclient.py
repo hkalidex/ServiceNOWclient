@@ -128,7 +128,7 @@ class ServiceNOWclient(RESTclient):
                 break
         logger.debug('retrieved all pages from endpoint {}'.format(endpoint))
 
-    def get_physical_hardware(self, page_size=1000, hardware_status=['In Use']):
+    def get_physical_hardware(self, page_size=10, hardware_status=['In Use']):
         """ get physical hardware records
         """
         logger.debug('retrieving physical hardware records using page size {} and hardware status {}'.format(page_size, hardware_status))
