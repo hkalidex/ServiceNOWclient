@@ -202,7 +202,7 @@ class ServiceNOWclient(RESTclient):
         return self.get_all_pages(query, page_size, apply_filter=filter_physical_servers_in_use)
 
     def get_servers(self, page_size=1000):
-        """ get physical servers
+        """ get  servers
         """
         logger.debug('retrieving physical server records using page size {}'.format(page_size))
         query = (
