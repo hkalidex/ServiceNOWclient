@@ -201,6 +201,41 @@ class ServiceNOWclient(RESTclient):
 
         return self.get_all_pages(query, page_size, apply_filter=filter_physical_servers_in_use)
 
+    def get_servers(self, page_size=1000):
+        """ get physical servers
+        """
+        logger.debug('retrieving physical server records using page size {}'.format(page_size))
+        query = (
+            '/api/now/table/cmdb_rel_ci'
+                '?sysparm_query='
+                    'type.name=Allocated to::Allocated from'
+                    '^child.sys_class_nameINSTANCEOFcmdb_ci_server'
+                    '^parent.sys_class_nameINSTANCEOFu_service_application'
+                    '^child.model_id.name LIKEvirtual'
+                    '^child.hardware_status=In Use'
+                    '^ORDERBYchild.sys_id'
+                '&sysparm_fields='
+                    'child,'
+                    'child.sys_id,'
+                    'child.virtual,'
+                    'child.assigned_to,'
+                    'child.assigned_to.user_name,'
+                    'child.hardware_status,'
+                    'child.ip_address,'
+                    'child.cpu_name,'
+                    'child.os,'
+                    'child.model_id.name,'
+                    'child.cpu_count,'
+                    'child.ram,'
+                    'child.disk_space,'
+                    'parent.ref_u_service_application.u_software_product.u_iap_application_id,'
+                    'child.sys_class_name,'
+                    'parent.sys_class_name'
+                '&sysparm_exclude_reference_link=true'
+                '&sysparm_display_value=true')
+
+        return self.get_all_pages(query, page_size, apply_filter=filter_virtual_servers_in_use)
+        
     @classmethod
     def get_ServiceNOWclient(cls, hostname=None, username=None, password=None):
         """ return instance of ServiceNOWclient
