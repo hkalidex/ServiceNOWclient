@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 logging.getLogger('urllib3.connectionpool').setLevel(logging.CRITICAL)
 
 
-SERVICENOW_HOST = 'e2esm.intel.com'
+SERVICENOW_HOST = 'apis.intel.com'
 
 
 class ExecutionTimeExceeded(Exception):
